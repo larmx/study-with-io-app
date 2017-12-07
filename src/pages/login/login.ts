@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
 
 import { User } from '../../providers/providers';
-import { MainPage } from '../pages';
+import { MainPage, SignupPage } from '../pages';
 
 @IonicPage()
 @Component({
@@ -24,12 +23,8 @@ export class LoginPage {
 
   constructor(public navCtrl: NavController,
     public user: User,
-    public toastCtrl: ToastController,
-    public translateService: TranslateService) {
+    public toastCtrl: ToastController) {
 
-    this.translateService.get('LOGIN_ERROR').subscribe((value) => {
-      this.loginErrorString = value;
-    })
   }
 
   // Attempt to login in through our User service
@@ -46,5 +41,9 @@ export class LoginPage {
       });
       toast.present();
     });
+  }
+
+  goToSignup() {
+    this.navCtrl.push(SignupPage);
   }
 }
