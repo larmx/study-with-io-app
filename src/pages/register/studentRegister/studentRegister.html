@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Register</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <form [formGroup]="authForm" (ngSubmit)="onSubmit(authForm.value)">
+      <ion-list>
+        <ion-item [ngClass]="{'error-border':!authForm.controls.username.valid && authForm.controls.username.touched}">
+            <ion-label floating>Username</ion-label>
+            <ion-input formControlName="username" type="text"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="authForm.controls.username.hasError('required') && authForm.controls.username.touched">
+            <p>Sorry, field username is required!</p>
+        </ion-item>
+  
+        <ion-item [ngClass]="{'error-border':!authForm.controls.password.valid && authForm.controls.password.touched}">
+            <ion-label floating>Password</ion-label>
+            <ion-input formControlName="password" type="password"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="authForm.controls.password.hasError('required') && authForm.controls.password.touched">
+            <p>Sorry, field password is required!</p>
+        </ion-item>
+
+        <ion-item [ngClass]="{'error-border':!authForm.controls.confirmation.valid && authForm.controls.confirmation.touched}">
+            <ion-label floating>Confirm Password</ion-label>
+            <ion-input formControlName="confirmation" type="password"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="authForm.controls.confirmation.hasError('required') && authForm.controls.confirmation.touched">
+            <p>Sorry, field confirm password is required!</p>
+        </ion-item>
+        <ion-item *ngIf="authForm.controls.confirmation.hasError('matchOther') && authForm.controls.confirmation.touched">
+            <p>Passwords don't match!</p>
+        </ion-item>
+
+        <ion-item [ngClass]="{'error-border':!authForm.controls.grade.valid && authForm.controls.grade.touched}">
+            <ion-label floating>Grade</ion-label>
+            <ion-input formControlName="grade" type="text"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="authForm.controls.grade.hasError('required') && authForm.controls.grade.touched">
+            <p>Sorry, field grade is required!</p>
+        </ion-item>
+
+        <ion-item [ngClass]="{'error-border':!authForm.controls.objective.valid && authForm.controls.objective.touched}">
+            <ion-label floating>Objective</ion-label>
+            <ion-input formControlName="objective" type="text"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="authForm.controls.objective.hasError('required') && authForm.controls.objective.touched">
+            <p>Sorry, field objective is required!</p>
+        </ion-item>
+        <button ion-button full color="primary" [disabled]="!authForm.valid" style="margin-top: 20px;" type="submit">Register</button>
+      </ion-list>
+    </form>
+</ion-content>

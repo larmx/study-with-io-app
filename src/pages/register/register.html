@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Register</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <form [formGroup]="authForm" (ngSubmit)="onSubmit(authForm.value)">
+      <ion-list>
+        <ion-item [ngClass]="{'error-border':!authForm.controls.role.valid && authForm.controls.role.touched}">
+          <ion-label>Role</ion-label>
+          <ion-select formControlName="role">
+            <ion-option value="teacher">Teacher</ion-option>
+            <ion-option value="student">Student</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item *ngIf="authForm.controls.role.hasError('required') && authForm.controls.role.touched">
+            <p>Sorry, field role is required!</p>
+        </ion-item>
+        <button ion-button full color="primary" [disabled]="!authForm.valid" style="margin-top: 20px;" type="submit">Register</button>
+      </ion-list>
+    </form>
+</ion-content>
