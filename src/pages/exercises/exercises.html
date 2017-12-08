@@ -5,7 +5,7 @@
 
     <ion-item end>
       <img src="../../assets/img/diamond.svg">
-      <p>{{}}</p>
+      <p>{{points}}</p>
     </ion-item>
   </ion-navbar>
 
@@ -14,7 +14,7 @@
 <ion-content>
 
   <ion-list>
-    <ion-item-sliding *ngFor="let item of currentItems">
+    <ion-item-sliding *ngFor="let item of exercises">
       <button ion-item (click)="openItem(item)">
         <ion-avatar item-start>
           <img [src]="item.profilePic" />
