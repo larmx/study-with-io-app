@@ -1,3 +1,58 @@
 page-tabs {
+  .tabbar {
+    height: 80px;
+  }
+  .tabs-ios .tabbar {
+    background: white;
+    padding: 5px 20px 0 20px;
+  }
 
+  .tab-button {
+    height: 80px;
+  }
+
+  .ion-ios-exercises,
+  .ion-md-exercises {
+    content: url(../../assets/img/training-clicked.svg);
+    width: 60px;
+    height: 60px;
+  }
+
+  .ion-ios-exercises-outline,
+  .ion-md-exercises-outline {
+    content: url(../../assets/img/training.svg);
+    width: 40px;
+    height: 40px;
+  }
+  .ion-ios-badges,
+  .ion-md-badges {
+    content: url(../../assets/img/badges-clicked.svg);
+    width: 40px;
+    height: 40px;
+  }
+
+  .ion-ios-badges-outline,
+  .ion-md-badges-outline {
+    content: url(../../assets/img/badges.svg);
+    width: 40px;
+    height: 40px;
+  }
+  .ion-ios-account,
+  .ion-md-account {
+    content: url(../../assets/img/account-clicked.svg);
+    width: 40px;
+    height: 40px;
+  }
+
+  .ion-ios-account-outline,
+  .ion-md-account-outline {
+    content: url(../../assets/img/account.svg);
+    width: 40px;
+    height: 40px;
+  }
+
+  .tab-button-icon {
+    width: 60px;
+    height: 60px;
+  }
 }

@@ -6,14 +6,20 @@ import { Items } from '../../providers/providers';
 
 @IonicPage()
 @Component({
-  selector: 'page-list-master',
-  templateUrl: 'list-master.html'
+  selector: 'page-exercises',
+  templateUrl: 'exercises.html'
 })
-export class ListMasterPage {
-  currentItems: Item[];
+export class ExercisesPage {
+  exercises: Item[];
+
+  points: number;
+
+
 
   constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController) {
-    this.currentItems = this.items.query();
+    this.exercises = this.items.query();
+    //TODO: connect points to the route api
+    this.points = 14;
   }
 
   /**
@@ -51,4 +57,6 @@ export class ListMasterPage {
       item: item
     });
   }
+
+
 }

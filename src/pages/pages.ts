@@ -7,6 +7,6 @@ export const SignupPage = 'SignupPage';
 export const MainPage = 'TabsPage';
 
 // The initial root pages for our tabs (remove if not using tabs)
-export const Tab1Root = 'ListMasterPage';
-export const Tab2Root = 'SearchPage';
+export const Tab1Root = 'ExercisesPage';
+export const Tab2Root = 'BadgesPage';
 export const Tab3Root = 'SettingsPage';
