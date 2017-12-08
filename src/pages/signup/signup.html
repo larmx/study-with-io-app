@@ -1,44 +1,48 @@
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>StudyWithIO</ion-title>
-  </ion-navbar>
-
+    <ion-navbar>
+        <ion-title id="title">STUDY WITH <span style="color: #58A1FF">IO</span></ion-title>
+    </ion-navbar>
 </ion-header>
 
 
-<ion-content>
+<ion-content padding="true" scroll="false">
   <form (submit)="doSignup()">
-    <ion-list>
+    <div class="row responsive-md">
+        <div class="col col-50 col-offset-25">
+            <h2> Inscris-toi gratuitement </h2>
+            <ion-list>
+                <ion-row>
+                    <ion-col id="left" width-50>
+                        <ion-item>
+                          <ion-input type="text" name="name" placeholder="Nom"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                    <ion-col id="right" width-50>
+                        <ion-item>
+                          <ion-input type="text" name="firstname" placeholder="Prénom"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
 
-      <ion-item>
-        <ion-label fixed>Nom</ion-label>
-        <ion-input type="text" name="name"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label fixed>Email</ion-label>
-        <ion-input type="email" name="email"></ion-input>
-      </ion-item>
-
-      <!--
-      Want to add a Username? Here you go:
-
-      <ion-item>
-        <ion-label floating>Username</ion-label>
-        <ion-input type="text" [(ngModel)]="account.username" name="username"></ion-input>
-      </ion-item>
-      -->
-
-      <ion-item>
-        <ion-label fixed>Mot de passe</ion-label>
-        <ion-input type="password" name="password"></ion-input>
-      </ion-item>
-
-      <div padding>
-        <button ion-button color="primary" block>Commencer</button>
+                  <ion-item>
+                    <ion-input type="email" name="email" placeholder="Adresse email"></ion-input>
+                  </ion-item>
+                  <ion-item>
+                    <ion-input type="password" name="password"  placeholder="Mot de passe"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-input type="password" name="confirmation"  placeholder="Confirmer mot de passe"></ion-input>
+              </ion-item>
+                  <div class = "register-button">
+                    <button ion-button color="primary" block>Commencer</button>
+                  </div>
+              </ion-list>
+          </div>
       </div>
-
-    </ion-list>
   </form>
+  <footer>
+          <div class="col col-50 col-offset-25">
+      Déjà inscrit(e) ? <a (click)='goToLogin()'>Connecte-toi.</a>
+          </div>
+  </footer>
 </ion-content>

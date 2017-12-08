@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
 
 import { User } from '../../providers/providers';
-import { MainPage } from '../pages';
+import { MainPage, FirstRunPage } from '../pages';
 
 @IonicPage()
 @Component({
@@ -44,5 +44,9 @@ export class SignupPage {
       });
       toast.present();
     });
+  }
+
+  goToLogin(){
+      this.navCtrl.pop();
   }
 }
