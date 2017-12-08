@@ -8,4 +8,13 @@ page-exercises {
   .toolbar-background {
     background: white;
   }
+
+  ion-navbar {
+    .points {
+      vertical-align: middle !important;
+      font-size: 15px;
+    }
+  }
+
 }
+

@@ -13,8 +13,11 @@ export class BadgesPage {
 
   currentItems: any = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public items: Items) { }
+  points: number
 
+  constructor(public navCtrl: NavController, public navParams: NavParams, public items: Items) {
+    this.points = 14;
+  }
   /**
    * Perform a service for the proper items.
    */

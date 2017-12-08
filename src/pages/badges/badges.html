@@ -1,8 +1,17 @@
 <ion-header>
 
-  <ion-navbar>
-    <img src="../../assets/img/logo.png">
-    <ion-title>Badges</ion-title>
+  <ion-navbar class="row responsive-md">
+    <ion-row>
+      <ion-col col-9>
+        <img src="../../assets/img/logo.png">
+      </ion-col>
+      <ion-col text-end col-2>
+        <img src="../../assets/img/diamond.svg">
+      </ion-col>
+      <ion-col class="points" col-1>
+        <p>{{points}}</p>
+      </ion-col>
+    </ion-row>
   </ion-navbar>
 
 </ion-header>
