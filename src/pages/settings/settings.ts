@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { ModalController, IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
 import { Settings } from '../../providers/providers';
+
+import { TeacherModalPage } from '../pages';
 
 /**
  * The Settings page is a simple form that syncs with a Settings provider
@@ -19,7 +21,7 @@ export class SettingsPage {
   options: any;
 
   settingsReady = false;
-
+  items: any;
   form: FormGroup;
 
   profileSettings = {
@@ -36,55 +38,80 @@ export class SettingsPage {
   constructor(public navCtrl: NavController,
     public settings: Settings,
     public formBuilder: FormBuilder,
-    public navParams: NavParams) {
-  }
-
-  _buildForm() {
-    let group: any = {
-      option1: [this.options.option1],
-      option2: [this.options.option2],
-      option3: [this.options.option3]
-    };
-
-    switch (this.page) {
-      case 'main':
-        break;
-      case 'profile':
-        group = {
-          option4: [this.options.option4]
-        };
-        break;
-    }
-    this.form = this.formBuilder.group(group);
-
-    // Watch the form for changes, and
-    this.form.valueChanges.subscribe((v) => {
-      this.settings.merge(this.form.value);
-    });
-  }
-
-  ionViewDidLoad() {
-    // Build an empty form for the template to render
-    this.form = this.formBuilder.group({});
-  }
-
-  ionViewWillEnter() {
-    // Build an empty form for the template to render
-    this.form = this.formBuilder.group({});
-
-    this.page = this.navParams.get('page') || this.page;
-    this.pageTitleKey = this.navParams.get('pageTitleKey') || this.pageTitleKey;
-
-
-    this.settings.load().then(() => {
-      this.settingsReady = true;
-      this.options = this.settings.allSettings;
-
-      this._buildForm();
-    });
+    public navParams: NavParams,
+    public alertCtrl: AlertController,
+    public modalCtrl: ModalController) {
+        this.items = [
+            {
+                name: 'Carla Timsit',
+                phone: '+33 6 45 67 35 78'
+            },
+            {
+                name: 'Julia Robert',
+                phone: '+33 6 45 67 35 78'
+            }
+        ]
   }
 
   ngOnChanges() {
     console.log('Ng All Changes');
+  }
+
+  openModal(characterNum) {
+   let modal = this.modalCtrl.create(TeacherModalPage);
+   modal.present();
+ }
+
+  doPromptPassword() {
+     let prompt = this.alertCtrl.create({
+       title: 'Modification du mot de passe',
+       inputs: [
+         {
+           name: 'oldPassword',
+           placeholder: 'Ancien mot de passe'
+         },
+         {
+           name: 'newPassword',
+           placeholder: 'Nouveau mot de passe'
+         },
+         {
+           name: 'newPasswordConf',
+           placeholder: 'Confirmation'
+         },
+       ],
+       buttons: [
+         {
+           text: 'Cancel',
+           handler: data => {
+             console.log('Cancel clicked');
+           }
+         },
+         {
+           text: 'Save',
+           handler: data => {
+             console.log(data);
+             console.log('Saved clicked');
+           }
+         }
+       ]
+     });
+     prompt.present();
+   }
+
+   doPromptNotif() {
+    let alert = this.alertCtrl.create();
+    alert.setTitle('Which planets have you visited?');
+
+    alert.addInput({
+      type: 'toggle',
+      label: 'Notification',
+      value: 'Notification',
+      checked: true
+    });
+
+    alert.addButton('Cancel');
+    alert.addButton({
+      text: 'Okay'
+    });
   }
 }

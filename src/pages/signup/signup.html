@@ -23,9 +23,11 @@
                         </ion-item>
                     </ion-col>
                 </ion-row>
-
                   <ion-item>
                     <ion-input type="email" name="email" placeholder="Adresse email"></ion-input>
+                  </ion-item>
+                  <ion-item>
+                      <ion-input type="tel" name="phone" placeholder = "Numéro de téléphone"></ion-input>
                   </ion-item>
                   <ion-item>
                     <ion-input type="password" name="password"  placeholder="Mot de passe"></ion-input>
@@ -33,6 +35,14 @@
                 <ion-item>
                   <ion-input type="password" name="confirmation"  placeholder="Confirmer mot de passe"></ion-input>
               </ion-item>
+                <ion-item>
+                  <ion-label></ion-label>
+                  <ion-select multiple="false" interface="popover">
+                    <ion-option>Etudiant</ion-option>
+                    <ion-option>Professeur</ion-option>
+                  </ion-select>
+                </ion-item>
+
                   <div class = "register-button">
                     <button ion-button color="primary" block>Commencer</button>
                   </div>
