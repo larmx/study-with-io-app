@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
  */
 @Injectable()
 export class Api {
-  url: string = 'https://localhost:3000/api/users';
+  url: string = 'http://localhost:3000/api/users';
 
   constructor(public http: HttpClient) {
   }
@@ -30,6 +30,7 @@ export class Api {
   }
 
   post(endpoint: string, body: any, reqOpts?: any) {
+    console.log(this.url + '/' + endpoint);
     return this.http.post(this.url + '/' + endpoint, body, reqOpts);
   }
 

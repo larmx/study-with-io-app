@@ -11,10 +11,10 @@
                 <h2> Se connecter </h2>
                 <ion-list>
                     <ion-item>
-                        <ion-input type="email" name="email" placeholder = "Adresse email"></ion-input>
+                        <ion-input type="email" name="email" [(ngModel)]="account.email" placeholder = "Adresse email"></ion-input>
                     </ion-item>
                     <ion-item>
-                        <ion-input type="password" name="password" placeholder = "Mot de passe"></ion-input>
+                        <ion-input type="password" name="password" [(ngModel)]="account.password" placeholder = "Mot de passe"></ion-input>
                     </ion-item>
                 </ion-list>
                 <div class = "login-button">

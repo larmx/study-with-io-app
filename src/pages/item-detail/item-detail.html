@@ -12,7 +12,11 @@
   </div>
 
   <div class="item-detail" padding>
-    <h2>{{item.name}}</h2>
-    <p>{{item.about}}</p>
+    <h2 text-center>{{item.name}}</h2>
+    <p>{{item.instructions}}</p>
   </div>
+  <footer text-end>
+    <button ion-button color="primary" (click)="beginExercise(item)">Commencer</button>
+  </footer>
+
 </ion-content>

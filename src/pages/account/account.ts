@@ -6,10 +6,10 @@ import { Items } from '../../providers/providers';
 
 @IonicPage()
 @Component({
-  selector: 'page-badges',
-  templateUrl: 'badges.html'
+  selector: 'page-account',
+  templateUrl: 'account.html'
 })
-export class BadgesPage {
+export class AccountPage {
 
   currentItems: any = [];
 

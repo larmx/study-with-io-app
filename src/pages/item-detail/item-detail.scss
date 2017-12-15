@@ -11,4 +11,20 @@ page-item-detail {
     background: white;
     position: absolute;
   }
+
+  ion-row {
+    align-content: right;
+    justify-content: right;
+    justify-items: right;
+
+  }
+
+  footer{
+    position: absolute;
+    right: 5%;
+    bottom: 10px;
+    color: white;
+    text-align: right;
+    padding-left: 20px;
+  }
 }

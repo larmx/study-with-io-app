@@ -1,0 +1,49 @@
+page-question {
+  ion-content {
+    h1 {
+      font-size: 20px;
+      font-weight: bold;
+    }
+    h2 {
+      font-size: 18px;
+      //font-weight: bold;
+      margin: 35px 0 25px 0;
+    },
+    button, button[disabled] {
+      background-color: transparent;
+      font-size: 14px;
+      opacity: 1;
+      color: black;
+      width: 100%;
+
+      ion-card {
+        border-radius: 5px !important;
+        height: 50px;
+      }
+    }
+  }
+
+  footer{
+    width: 100%;
+    padding: 5%;
+
+    .comment {
+      margin: auto;
+
+      div {
+        padding-left: 20px;
+      }
+
+      img {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+
+    button {
+      color: white;
+      width: 100px;
+    }
+  }
+}

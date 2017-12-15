@@ -1,0 +1,18 @@
+page-account {
+  img {
+    width: 50px;
+    height: 50px;
+    margin: 5px 0 0 5px;
+  }
+
+  .toolbar-background {
+    background: white;
+  }
+
+  ion-navbar {
+    .points {
+      vertical-align: middle !important;
+      font-size: 15px;
+    }
+  }
+}

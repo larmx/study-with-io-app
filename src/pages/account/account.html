@@ -1,0 +1,42 @@
+<ion-header>
+
+  <ion-navbar class="row responsive-md">
+    <ion-row>
+      <ion-col col-9>
+        <img src="../../assets/img/logo.png">
+      </ion-col>
+      <ion-col text-end col-2>
+        <img src="../../assets/img/diamond.svg">
+      </ion-col>
+      <ion-col class="points" col-1>
+        <p>{{points}}</p>
+      </ion-col>
+    </ion-row>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+
+  <form [formGroup]="form" *ngIf="settingsReady">
+    <ion-list>
+      <ion-item-sliding *ngFor="let item of exercises">
+        <button ion-item (click)="openItem(item)">
+          <ion-avatar item-start>
+            <img [src]="item.profilePic" />
+          </ion-avatar>
+          <h2>{{item.name}}</h2>
+          <p>{{item.about}}</p>
+          <ion-note item-end *ngIf="item.note">{{item.note}}</ion-note>
+        </button>
+
+        <ion-item-options>
+          <button ion-button color="danger" (click)="deleteItem(item)">
+            Supprimer
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  </form>
+
+</ion-content>

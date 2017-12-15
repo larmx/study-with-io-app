@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { Settings } from '../../providers/providers';
+import { Item } from '../../models/item';
+import { Items } from '../../providers/providers';
 
 /**
  * The Settings page is a simple form that syncs with a Settings provider

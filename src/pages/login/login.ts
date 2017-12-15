@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, ToastController, ViewController } from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
+import { Storage } from "@ionic/storage";
 
-import { User } from '../../providers/providers';
+import { User, Api } from '../../providers/providers';
 import { MainPage, SignupPage } from '../pages';
 
 @IonicPage()
@@ -10,39 +12,60 @@ import { MainPage, SignupPage } from '../pages';
   templateUrl: 'login.html'
 })
 export class LoginPage {
-  // The account fields for the login form.
-  // If you're using the username field with or without email, make
-  // sure to add it to the type
   account: { email: string, password: string } = {
-    email: 'test@example.com',
-    password: 'test'
+    email: '',
+    password: ''
   };
 
-  // Our translated text strings
-  private loginErrorString: string;
 
   constructor(public navCtrl: NavController,
-    public user: User,
-    public toastCtrl: ToastController) {
+              public view: ViewController,
+              public user: User,
+              public toastCtrl: ToastController,
+              public api: Api,
+              private alertCtrl: AlertController,
+              public storage: Storage) {
 
   }
 
   // Attempt to login in through our User service
   doLogin() {
-    this.navCtrl.push(MainPage);
-    // TODO: Connect to backend
-    // this.user.login(this.account).subscribe((resp) => {
-    //   this.navCtrl.push(MainPage);
-    // }, (err) => {
-    //   this.navCtrl.push(MainPage);
-    //   // Unable to log in
-    //   let toast = this.toastCtrl.create({
-    //     message: this.loginErrorString,
-    //     duration: 3000,
-    //     position: 'top'
-    //   });
-    //   toast.present();
-    // });
+    this.api.post('login', this.account).subscribe((res) => {
+      console.log("SERVER ANSWERED");
+      console.log(res);
+      const connectionInfos = JSON.stringify({
+        token: res.token,
+        refreshToken: res.refreshToken,
+        userId: res.userId
+      });
+      console.log(connectionInfos);
+      this.storage.set('connectionInfos', connectionInfos).then((res) =>
+      {
+        const viewId = this.navCtrl.indexOf(this.view);
+        console.log(viewId);
+        this.navCtrl.push(MainPage);
+        this.navCtrl.remove(0);
+      })
+        .catch(
+        (err) => {
+          console.error(err);
+        }
+      );
+
+    }, (err) => {
+      console.log("SERVER ERROR");
+      console.log(err);
+      this.presentAlert();
+    });
+  }
+
+  presentAlert() {
+    let alert = this.alertCtrl.create({
+      title: 'Erreur de connection',
+      subTitle: 'Votre Email ou votre mot de passe ne correspondent à aucun compte enregistré.',
+      buttons: ['Dismiss']
+    });
+    alert.present();
   }
 
   goToSignup() {

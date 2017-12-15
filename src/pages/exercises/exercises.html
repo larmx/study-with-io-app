@@ -8,7 +8,7 @@
       <ion-col text-end col-2>
         <img src="../../assets/img/diamond.svg">
       </ion-col>
-      <ion-col class="points" col-1>
+      <ion-col class="points" col-1 text-center justify-content-center>
         <p>{{points}}</p>
       </ion-col>
     </ion-row>
@@ -17,5 +17,42 @@
 </ion-header>
 
 <ion-content>
+  <div class="goal">
+    <h2 text-center class="title">Objectif de la semaine</h2>
+    <progress-bar></progress-bar>
+  </div>
+
+  <h2 text-center class="title">Exercices</h2>
+  <ion-scroll scrollX="true">
+    <ion-row nowrap>
+      <ion-col class="cards" *ngFor="let item of exercises">
+        <ion-card>
+          <button (click)="openItem(item)" detail-none>
+            <ion-row>
+
+              <ion-col col-12 class="col-avatar">
+                <ion-avatar>
+                  <img class="avatar" [src]="item.profilePic" />
+                </ion-avatar>
+              </ion-col>
+
+              <ion-col col-12>
+                <div text-center>
+                  <ion-icon name="star" class="difficulty" *ngFor="let i of getNumber(item.difficulty)"></ion-icon>
+                  <p class="time">{{item.time}} min.</p>
+                </div>
+              </ion-col>
+
+              <div class="exercise-info">
+                <h2 class="name">{{item.name}}</h2>
+                <p class="instructions">{{item.instructions}}</p>
+              </div>
+            </ion-row>
+          </button>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+  </ion-scroll>
 
 </ion-content>
