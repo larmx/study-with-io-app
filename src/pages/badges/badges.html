@@ -18,15 +18,37 @@
 
 
 <ion-content>
-  <ion-searchbar (ionInput)="getItems($event)" placeholder="Rechercher"></ion-searchbar>
-  <ion-list>
-    <button ion-item (click)="openItem(item)" *ngFor="let item of currentItems">
-      <ion-avatar item-start>
-        <img [src]="item.profilePic" />
-      </ion-avatar>
-      <h2>{{item.name}}</h2>
-      <p>{{item.about}}</p>
-      <ion-note item-end *ngIf="item.note">{{item.note}}</ion-note>
-    </button>
-  </ion-list>
+    <div class = "row">
+            <div class = "col">
+                <img (click)="doAlert()" src="../../assets/img/badges/001-gym-3.svg">
+            </div>
+       <div class = "col">
+           <img src="../../assets/img/badges/002-gym-2.svg">
+       </div>
+       <div class = "col">
+           <img src="../../assets/img/badges/011-teacher.svg">
+       </div>
+    </div>
+    <div class = "row">
+        <div class = "col">
+            <img src="../../assets/img/badges/007-trophy.svg">
+        </div>
+        <div class = "col">
+            <img src="../../assets/img/badges/004-dumbbell.svg">
+        </div>
+        <div class = "col">
+            <img class = "lock" src="../../assets/img/badges/locked-padlock.svg">
+        </div>
+    </div>
+    <div class = "row">
+        <div class = "col">
+            <img class = "lock" src="../../assets/img/badges/locked-padlock.svg">
+        </div>
+        <div class = "col">
+            <img class = "lock" src="../../assets/img/badges/locked-padlock.svg">
+        </div>
+        <div class = "col">
+            <img class = "lock" src="../../assets/img/badges/locked-padlock.svg">
+        </div>
+    </div>
 </ion-content>

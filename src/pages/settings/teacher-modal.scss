@@ -1,15 +1,13 @@
-page-settings {
+page-teacher-modal {
 
     .item-ios-light, .item-divider-ios{
+        background-color: color($colors, primary);
+        color : white;
         text-align: center;
-        margin-top: 10px;
-        margin-bottom: 10px;
-        border: 10px;
-        border-color: color($colors, primary);
     }
 
-    .button-ios{
-        background-color: #f53d3d;
+    #add{
+        background-color: color($colors, primary);
     }
     .ion-icon{
         color: color($colors, primary);

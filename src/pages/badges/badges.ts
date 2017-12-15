@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { AlertController } from 'ionic-angular';
 import { Item } from '../../models/item';
 import { Items } from '../../providers/providers';
 
@@ -15,7 +15,7 @@ export class BadgesPage {
 
   points: number;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public items: Items) {
+  constructor(public alerCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams, public items: Items) {
     this.points = 14;
   }
   /**
@@ -39,6 +39,15 @@ export class BadgesPage {
     this.navCtrl.push('ItemDetailPage', {
       item: item
     });
+  }
+
+  doAlert() {
+    let alert = this.alerCtrl.create({
+      title: 'Nouveau Badge ! ',
+      message: 'Tu as créé ton compte, bravo!',
+      buttons: ['Ok']
+    });
+    alert.present()
   }
 
 }
