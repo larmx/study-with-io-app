@@ -10,10 +10,22 @@
       </button>
     </ion-buttons>
   </ion-toolbar>
+<ion-toolbar no-border-top>
+    <ion-segment [(ngModel)]="teacher">
+      <ion-segment-button value="search">
+        Recherche
+      </ion-segment-button>
+      <ion-segment-button value="requests">
+        Demandes
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-  <ion-list>
+<ion-content>
+  <div [ngSwitch]="teacher">
+
+  <ion-list *ngSwitchCase="'search'">
 
       <ion-item-divider color="light">
         Trouve ton professeur
@@ -35,10 +47,29 @@
     </ion-item-sliding>
 
   </ion-list>
-  <ion-list>
-    <ion-item-divider color="light">
-      Mon QR Code
-    </ion-item-divider>
-  </ion-list>
-  <img src="../../assets/img/qr.png" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+  <ion-list *ngSwitchCase="'requests'">
+      <ion-item-divider color="light">
+        Demandes d'ajout
+      </ion-item-divider>
+
+      <ion-item-sliding *ngFor="let request of requests">
+
+        <ion-item color="none" id="paramTres-list-item4">
+          {{ request.name }} <br> <h5>{{ request.phone }}</h5>
+          <ion-note item-right></ion-note>
+          <ion-icon name="phone-portrait" item-left></ion-icon>
+        </ion-item>
+
+        <ion-item-options side="right">
+          <button ion-button color="assertive">
+            Ajouter
+          </button>
+          <button ion-button color=red>
+            Refuser
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+ </ion-list>
+
+ </div>
 </ion-content>

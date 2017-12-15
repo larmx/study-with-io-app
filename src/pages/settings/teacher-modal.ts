@@ -16,6 +16,16 @@ export class TeacherModalPage {
         public viewCtrl: ViewController
     ){
         this.initializeItems();
+        this.requests = [
+            {
+                name: 'Carla Timsit',
+                phone: '+33 6 45 67 35 78'
+            },
+            {
+                name: 'Julia Robert',
+                phone: '+33 6 45 67 35 78'
+            }
+        ]
     }
 
     initializeItems() {

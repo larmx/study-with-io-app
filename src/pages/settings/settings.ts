@@ -5,6 +5,7 @@ import { AlertController } from 'ionic-angular';
 import { Settings } from '../../providers/providers';
 
 import { TeacherModalPage } from '../pages';
+import { AddModalPage } from '../pages';
 
 /**
  * The Settings page is a simple form that syncs with a Settings provider
@@ -61,6 +62,11 @@ export class SettingsPage {
    let modal = this.modalCtrl.create(TeacherModalPage);
    modal.present();
  }
+
+ openModalAdd(characterNum) {
+  let modal = this.modalCtrl.create(AddModalPage);
+  modal.present();
+}
 
   doPromptPassword() {
      let prompt = this.alertCtrl.create({
