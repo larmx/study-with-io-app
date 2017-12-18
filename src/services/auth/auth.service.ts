@@ -14,7 +14,7 @@ export class AuthService {
   // setExercise(exercise) {
   //   this.activeExercise = exercise;
   // }
-  //
+
   // getActiveExercise() {
   //   return this.activeExercise;
   // }
