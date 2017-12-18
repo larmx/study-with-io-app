@@ -1,0 +1,34 @@
+page-content {
+    .item-ios-light, .item-divider-ios{
+        text-align: center;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        border: 10px;
+        border-color: color($colors, primary);
+    }
+    .item-divider{
+        text-align: center;
+        background-color: color($colors, grey);
+        margin: 5px;
+        color: white;
+    }
+
+    .button-ios{
+        background-color: #f53d3d;
+    }
+    .ion-icon{
+        color: color($colors, primary);
+    }
+    #top{
+        background-color: color($colors, grey);
+    }
+    #delete{
+        background-color: #f53d3d;
+    }
+    #add{
+        background-color: color($colors, primary);
+    }
+    #form{
+        background-color: white;
+    }
+}

@@ -10,6 +10,7 @@ import { Settings } from '../../providers/providers';
 })
 export class TeacherModalPage {
     items:any;
+    requests: any;
     constructor(
         public platform: Platform,
         public params: NavParams,

@@ -1,0 +1,146 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Formulaire de fin de cours</ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <span ion-text color="primary" showWhen="ios">Annuler</span>
+        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="tutorial-page">
+
+  <ion-slides pager>
+      <ion-slide>
+            <ion-list>
+              <ion-item class="item-divider" id="slide-title"> Révision des notions précédentes</ion-item>
+              <ion-item-sliding *ngFor="let oldChapter of oldChapters; let i = index">
+                  <ion-item>
+                     <ion-label> {{ oldChapter.chapter }} - {{ oldChapter.notion }} </ion-label>
+                     <ion-toggle [(ngModel)]= "chapters[i].checked" (ngModelChange)="getCheck(chapters[i].checked, oldChapter.chapter, oldChapter.notion, i)"></ion-toggle>
+                   </ion-item>
+                  <ion-item *ngIf="chapters[i].checked">Cours appris</ion-item>
+                  <ion-item *ngIf="chapters[i].checked">
+                      <ion-range min="1" max="5" step="1" snaps="true" [(ngModel)]="chapters[i].lesson" (ngModelChange)="getChanges()" color="primary">
+                        <ion-icon range-left small name="clipboard"></ion-icon>
+                        <ion-icon range-right name="clipboard"></ion-icon>
+                      </ion-range>
+                    </ion-item>
+                  <ion-item *ngIf="chapters[i].checked">Difficulté des exercices aquis</ion-item>
+                  <ion-item *ngIf="chapters[i].checked">
+                      <ion-range min="1" max="5" step="1" snaps="true" [(ngModel)]="chapters[i].exercises" color="primary">
+                        <ion-icon range-left small name="create"></ion-icon>
+                        <ion-icon range-right name="create"></ion-icon>
+                      </ion-range>
+                    </ion-item>
+                </ion-item-sliding>
+            </ion-list>
+      </ion-slide>
+
+       <ion-slide>
+           <ion-list>
+             <ion-item class="item-divider" id="slide-title"> Nouvelle Leçon</ion-item>
+             <div *ngFor="let j of getNumber(notionCounter); let k= index">
+                 <ion-card>
+                     <ion-card-header>
+
+                             <button ion-button>
+                               <span ion-text color="primary" showWhen="ios"></span>
+                               <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+                             </button>
+
+                     </ion-card-header>
+                     <ion-item>
+                           <ion-label>Chapitre</ion-label>
+                           <ion-select multiple="false" [(ngModel)] = "selectedChapters[k].index" (ngModelChange)="getChapter(selectedChapters[k].index, k)">
+                             <ion-option *ngFor="let chap of chapterList; let i = index" value="{{ i }}">{{ chap.chapter }}</ion-option>
+                           </ion-select>
+                    </ion-item>
+                    <ion-item>
+                          <ion-label>Notion</ion-label>
+                          <ion-select multiple="false" [(ngModel)] ="selectedChapters[k].selectedNotion">
+                            <ion-option *ngFor="let notion of selectedChapters[k].notions" value="{{ notion }}" > {{ notion }} </ion-option>
+                          </ion-select>
+                   </ion-item>
+                     <ion-item>Cours appris</ion-item>
+                     <ion-item>
+                         <ion-range min="1" max="5" step="1" snaps="true" [(ngModel)]="selectedChapters[k].lesson" color="primary">
+                           <ion-icon range-left small name="clipboard"></ion-icon>
+                           <ion-icon range-right name="clipboard"></ion-icon>
+                         </ion-range>
+                       </ion-item>
+                     <ion-item>Difficulté des exercices aquis</ion-item>
+                     <ion-item>
+                         <ion-range min="1" max="5" step="1" snaps="true" [(ngModel)]="selectedChapters[k].exercises" color="primary">
+                           <ion-icon range-left small name="create"></ion-icon>
+                           <ion-icon range-right name="create"></ion-icon>
+                         </ion-range>
+                       </ion-item>
+                   </ion-card>
+           </div>
+           <button ion-button color="primary" (click)="newNotion()">
+             Nouvelle notion
+           </button>
+           </ion-list>
+       </ion-slide>
+
+       <ion-slide>
+           <ion-list>
+             <ion-item class="item-divider" id="slide-title"> Prochain controle</ion-item>
+             <ion-item>
+                  <ion-label>Date</ion-label>
+                  <ion-datetime displayFormat="MMM DD YYYY"></ion-datetime>
+            </ion-item>
+            <ion-item>
+              <ion-label>Chapitre</ion-label>
+              <ion-select multiple="True">
+                <ion-option value="1">Fonctions</ion-option>
+                <ion-option value="2">Géométrie</ion-option>
+                <ion-option value="3">Algorithmie</ion-option>
+                <ion-option value="4">Statistiques</ion-option>
+              </ion-select>
+           </ion-item>
+
+             <!-- <ion-item class="item-divider" id="slide-title"> Contrôles précédents</ion-item>
+             <ion-item *ngFor="let controle of controles">
+                 <ion-label>{{ controle.date }}</ion-label>
+                 <ion-input type="text" placeholder="Note"></ion-input>
+             </ion-item> -->
+           </ion-list>
+       </ion-slide>
+
+       <ion-slide scroll="true">
+           <ion-list>
+             <div class="item item-body">
+               <div style="text-align:center;" class="show-list-numbers-and-dots">
+                 <p style="margin-top:0px;color:#000000;font-size:15px;">Veuillez sélectionner des exercices à faire avant le prochain cours.</p>
+               </div>
+
+             </div>
+
+             <ion-card *ngFor="let exercice of exercices">
+                  <ion-card-header>
+                    {{ exercice.name }}
+                  </ion-card-header>
+                  <ion-card-content>
+                    {{ exercice.resume }}
+                  </ion-card-content>
+                  <ion-row no-padding>
+                      <ion-col>
+                        <button ion-button clear small color="primary" icon-start>
+                          <ion-icon name='share-alt'></ion-icon>
+                          A faire
+                        </button>
+                      </ion-col>
+                    </ion-row>
+                </ion-card>
+
+           </ion-list>
+           <button ion-button color="primary">
+             VALIDER
+           </button>
+       </ion-slide>
+  </ion-slides>
+</ion-content>

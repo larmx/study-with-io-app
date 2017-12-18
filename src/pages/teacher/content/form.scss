@@ -1,0 +1,27 @@
+page-form {
+    ion-slide.swiper-slide {
+        padding: 20px;
+        align-items: flex-start;
+        height: auto;
+        overflow-y: scroll;
+    }
+
+    #slide-title{
+        text-align: center;
+        background-color: color($colors, grey);
+        margin: 5px;
+        color: white;
+    }
+
+    .item-divider{
+        text-align: center;
+        background-color: color($colors, primary);
+        margin: 5px;
+        color: white;
+    }
+
+    ion-icon{
+        color: color($colors, primary);
+    }
+
+}

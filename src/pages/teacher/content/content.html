@@ -1,0 +1,83 @@
+<ion-header>
+  <ion-toolbar no-border-top>
+      <ion-segment [(ngModel)]="teacher">
+        <ion-segment-button value="form">
+           Mes élèves
+        </ion-segment-button>
+        <ion-segment-button value="search">
+           Nouvel élève
+        </ion-segment-button>
+        <ion-segment-button value="requests">
+          Invitations
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <div [ngSwitch]="teacher">
+        <ion-list *ngSwitchCase="'form'">
+            <ion-item-divider>
+              Mes Élèves
+            </ion-item-divider>
+
+            <ion-item-sliding *ngFor="let item of items">
+              <ion-item color="none" id="paramTres-list-item4">
+                {{ item.name }} <br> <h5>{{ item.phone }}</h5>
+                <ion-note item-right></ion-note>
+                <ion-icon name="phone-portrait" item-left></ion-icon>
+
+                <button ion-button item-right id="form">
+                    <a ion-item (click)="openModal()"></a>
+                </button>
+
+              </ion-item>
+              <ion-item-options side="right">
+                <button ion-button id="delete">
+                  Supprimer
+                </button>
+              </ion-item-options>
+            </ion-item-sliding>
+
+        </ion-list>
+        <ion-list *ngSwitchCase="'search'">
+            <ion-item-divider color="light">
+              Recherche un élève
+            </ion-item-divider>
+          <ion-searchbar placeholder="Elèves" (ionInput)="getItems($event)"></ion-searchbar>
+          <ion-item-sliding *ngFor="let student of students">
+            <ion-item color="none">
+              {{ student }}
+              <ion-note item-right></ion-note>
+              <ion-icon name="contact" item-left></ion-icon>
+            </ion-item>
+            <ion-item-options side="right">
+              <button ion-button id="add">
+                Ajouter
+              </button>
+            </ion-item-options>
+          </ion-item-sliding>
+        </ion-list>
+        <ion-list *ngSwitchCase="'requests'">
+            <ion-item-divider color="light">
+              Demandes d'ajout
+            </ion-item-divider>
+            <ion-item-sliding *ngFor="let request of requests">
+              <ion-item color="none" id="paramTres-list-item4">
+                {{ request.name }} <br> <h5>{{ request.phone }}</h5>
+                <ion-note item-right></ion-note>
+                <ion-icon name="phone-portrait" item-left></ion-icon>
+              </ion-item>
+
+              <ion-item-options side="right">
+                <button ion-button id="add">
+                  Ajouter
+                </button>
+                <button ion-button id="delete">
+                  Refuser
+                </button>
+              </ion-item-options>
+            </ion-item-sliding>
+        </ion-list>
+    </div>
+</ion-content>
