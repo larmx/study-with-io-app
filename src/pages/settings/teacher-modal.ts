@@ -16,16 +16,16 @@ export class TeacherModalPage {
         public viewCtrl: ViewController
     ){
         this.initializeItems();
-        this.requests = [
-            {
-                name: 'Carla Timsit',
-                phone: '+33 6 45 67 35 78'
-            },
-            {
-                name: 'Julia Robert',
-                phone: '+33 6 45 67 35 78'
-            }
-        ]
+        // this.requests = [
+        //     {
+        //         name: 'Carla Timsit',
+        //         phone: '+33 6 45 67 35 78'
+        //     },
+        //     {
+        //         name: 'Julia Robert',
+        //         phone: '+33 6 45 67 35 78'
+        //     }
+        // ]
     }
 
     initializeItems() {
@@ -75,7 +75,7 @@ export class TeacherModalPage {
       this.initializeItems();
 
       // set val to the value of the ev target
-      var val = ev.target.value;
+      const val = ev.target.value;
 
       // if the value is an empty string don't filter the items
       if (val && val.trim() != '') {

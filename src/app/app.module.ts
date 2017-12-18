@@ -42,7 +42,9 @@ export function provideSettings(storage: Storage) {
     BrowserModule,
     HttpClientModule,
     NgProgressModule.forRoot(),
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {
+      backButtonText: 'Retour'
+    }),
     IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],

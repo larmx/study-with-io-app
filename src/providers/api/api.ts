@@ -1,12 +1,14 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import 'rxjs/add/operator/map';
 
 /**
  * Api is a generic REST Api handler. Set your API url first.
  */
 @Injectable()
 export class Api {
-  url: string = 'http://localhost:3000/api/users';
+  // url: string = 'http://localhost:3000/api/users';
+  url: string = 'http://10.10.201.254:3000/api/users';
 
   constructor(public http: HttpClient) {
   }

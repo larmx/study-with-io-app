@@ -31,16 +31,23 @@ page-exercises {
       width: 90vm;
       height: 300px;
 
+      .card-ios {
+        background-color: color($colors, grey);
+      }
+
       ion-card {
         margin: 0;
         height: 250px;
         width: 150px;
+        border-radius: 10px !important;
+        box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.3) !important;
 
         button {
           margin: 5px;
           width: 150px;
           padding-top: 0;
-          background-color: white;
+          background-color: color($colors, grey);
+          color: white;
 
           .col-avatar {
             padding-top: 20px;
@@ -53,8 +60,16 @@ page-exercises {
             border-radius: 30px;
           }
 
+
           ion-icon {
             font-size: 22px;
+            color: color($colors, primary);
+          }
+
+          .time {
+            font-style: italic;
+            font-size: 14px;
+            color: white;
           }
 
           .exercise-info {
@@ -73,12 +88,13 @@ page-exercises {
               white-space: inherit;
             }
 
+            .chapter {
+              font-style: italic;
+            }
+
           }
 
-          .time {
-            font-style: italic;
-            font-size: 14px;
-          }
+
 
         }
       }

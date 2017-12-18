@@ -35,13 +35,12 @@
                 <ion-item>
                   <ion-input type="password" name="confirmation" [(ngModel)]="account.passwordConfirm" placeholder="Confirmer mot de passe"></ion-input>
               </ion-item>
-                <ion-item>
-                  <ion-label></ion-label>
-                  <ion-select multiple="false" interface="popover">
-                    <ion-option>Etudiant</ion-option>
-                    <ion-option>Professeur</ion-option>
-                  </ion-select>
-                </ion-item>
+              <ion-item>
+                <ion-select class="status" multiple="false" interface="popover" name="role" [(ngModel)]="account.role">
+                  <ion-option selected="true" value="student">Élève</ion-option>
+                  <ion-option value="teacher">Professeur</ion-option>
+                </ion-select>
+              </ion-item>
 
                   <div class = "register-button">
                     <button ion-button color="primary" block>Commencer</button>

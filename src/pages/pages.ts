@@ -12,4 +12,4 @@ export const AddModalPage = 'AddModalPage';
 // The initial root pages for our tabs (remove if not using tabs)
 export const Tab1Root = 'ExercisesPage';
 export const Tab2Root = 'BadgesPage';
-export const Tab3Root = 'AccountPage';
+export const Tab3Root = 'SettingsPage';

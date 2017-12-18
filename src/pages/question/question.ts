@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { ModalController, IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 
 import { Items } from '../../providers/providers';
 import { ExerciseService } from "../../services/active-exercise/active-exercise";
@@ -23,7 +23,8 @@ export class QuestionPage {
               public navParams: NavParams,
               public items: Items,
               public exerciseService: ExerciseService,
-              public view: ViewController) {
+              public view: ViewController,
+              public modalCtrl: ModalController) {
     const exercise = this.exerciseService.getActiveExercise();
     this.numberOfQuestions = exercise.questions.length;
 
@@ -46,10 +47,15 @@ export class QuestionPage {
     if (this.id === exercise.questions.length-1) {
       this.navCtrl.pop();
     } else {
-      this.navCtrl.push('QuestionPage', {
+      let modal = this.modalCtrl.create('QuestionPage', {
         question: nextQuestion,
         id: this.id+1
       });
+      modal.present();
+      // this.navCtrl.push('QuestionPage', {
+      //   question: nextQuestion,
+      //   id: this.id+1
+      // });
       this.navCtrl.remove(viewId);
     }
 
@@ -70,6 +76,10 @@ export class QuestionPage {
   hasAnswered(i) {
     this.answered = true;
     this.answerId = i;
+  }
+
+  dismiss() {
+    this.view.dismiss();
   }
 
 

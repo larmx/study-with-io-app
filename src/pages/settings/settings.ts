@@ -46,12 +46,12 @@ export class SettingsPage {
     public modalCtrl: ModalController) {
         this.items = [
             {
-                name: 'Carla Timsit',
-                phone: '+33 6 45 67 35 78'
+                name: 'Benjamin Lapointe',
+                phone: '+33 6 25 97 33 78'
             },
             {
-                name: 'Julia Robert',
-                phone: '+33 6 45 67 35 78'
+                name: 'Émilie Clark',
+                phone: '+33 6 46 67 85 68'
             }
         ]
   }
@@ -60,7 +60,7 @@ export class SettingsPage {
     console.log('Ng All Changes');
   }
 
-  openModal(characterNum) {
+  openModal() {
    let modal = this.modalCtrl.create(TeacherModalPage);
    modal.present();
  }
