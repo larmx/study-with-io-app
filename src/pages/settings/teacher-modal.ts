@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, Platform, NavController, NavParams, ViewController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 import { Settings } from '../../providers/providers';
+import { Api } from '../../providers/api/api';
 
 @IonicPage()
 @Component({
@@ -13,76 +15,82 @@ export class TeacherModalPage {
     constructor(
         public platform: Platform,
         public params: NavParams,
-        public viewCtrl: ViewController
+        public viewCtrl: ViewController,
+        public api: Api,
+        public storage: Storage,
     ){
-        this.initializeItems();
-        this.requests = [
-            {
-                name: 'Carla Timsit',
-                phone: '+33 6 45 67 35 78'
-            },
-            {
-                name: 'Julia Robert',
-                phone: '+33 6 45 67 35 78'
-            }
-        ]
+      this.requests = [];
+      this.storage.get('connectionInfos').then((infos) => {
+        this.api.get(`users/${JSON.parse(infos).userId}/requests`).subscribe(requests => {
+          if (requests.length() > 0) {
+            requests.forEach(request => {
+              this.api.get(`users/${request.relationship.recipient}/info`).subscribe(info => {
+                this.requests.push({
+                  firstname: info.firstname,
+                  lastname: info.lastname,
+                  email: info.email,
+                  phone: info.phone,
+                  recipient: request.relationship.recipient,
+                });
+              });
+            });
+          }
+        });
+      });
+      console.log(this.requests);
+      this.initializeTeachers();
     }
 
-    initializeItems() {
-      this.items = [
-        'Amsterdam',
-        'Bogota',
-        'Buenos Aires',
-        'Cairo',
-        'Dhaka',
-        'Edinburgh',
-        'Geneva',
-        'Genoa',
-        'Glasglow',
-        'Hanoi',
-        'Hong Kong',
-        'Islamabad',
-        'Istanbul',
-        'Jakarta',
-        'Kiel',
-        'Kyoto',
-        'Le Havre',
-        'Lebanon',
-        'Lhasa',
-        'Lima',
-        'London',
-        'Los Angeles',
-        'Madrid',
-        'Manila',
-        'New York',
-        'Olympia',
-        'Oslo',
-        'Panama City',
-        'Peking',
-        'Philadelphia',
-        'San Francisco',
-        'Seoul',
-        'Taipeh',
-        'Tel Aviv',
-        'Tokio',
-        'Uelzen',
-        'Washington'
-      ];
+    initializeTeachers() {
+      this.api.get('users/teachers').subscribe(teachers => {
+        this.teachers = teachers;
+      })
     }
 
-    getItems(ev) {
+    getTeachers(ev) {
       // Reset items back to all of the items
-      this.initializeItems();
+      this.initializeTeachers();
 
       // set val to the value of the ev target
       var val = ev.target.value;
 
       // if the value is an empty string don't filter the items
       if (val && val.trim() != '') {
-        this.items = this.items.filter((item) => {
-          return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
+        this.teachers = this.teachers.filter((teacher) => {
+          return (teacher.firstname.toLowerCase().indexOf(val.toLowerCase()) > -1);
         })
       }
+    }
+
+    sendRequest(recipient) {
+      this.api.post('users/sendRequest', {
+        idRecipient: recipient, 
+      }).subscribe(res => {
+        console.log(res);
+      })
+    }
+
+    acceptRequest(recipient) {
+      console.log(recipient);
+      this.storage.get('connectionInfos').then((infos) => {
+        this.api.post('users/acceptRequest', {
+          idRequester: recipient,
+          idRecipient: JSON.parse(infos).userId,
+        }).subscribe(res => {
+          console.log(res);
+        })
+      })
+    }
+
+    refuseRequest(recipient) {
+      this.storage.get('connectionInfos').then((infos) => {
+        this.api.post('users/refuseRequest', {
+          idRequester: recipient,
+          idRecipient: JSON.parse(infos).userId,
+        }).subscribe(res => {
+          console.log(res);
+        })
+      })
     }
 
     dismiss() {

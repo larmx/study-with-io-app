@@ -22,10 +22,10 @@
       MES PROFS
     </ion-item-divider>
 
-    <ion-item-sliding *ngFor="let item of items">
+    <ion-item-sliding *ngFor="let relation of relations">
 
       <ion-item color="none" id="paramTres-list-item4">
-        {{ item.name }} <br> <h5>{{ item.phone }}</h5>
+        {{ relation.firstname }} <br> <h5>{{ item.phone }}</h5>
         <ion-note item-right></ion-note>
         <ion-icon name="phone-portrait" item-left></ion-icon>
       </ion-item>

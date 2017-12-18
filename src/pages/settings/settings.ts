@@ -2,12 +2,14 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ModalController, IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
+
 import { Settings } from '../../providers/providers';
 import { Item } from '../../models/item';
 import { Items } from '../../providers/providers';
-
 import { TeacherModalPage } from '../pages';
 import { AddModalPage } from '../pages';
+import { Api } from '../../providers/api/api';
 
 /**
  * The Settings page is a simple form that syncs with a Settings provider
@@ -43,17 +45,26 @@ export class SettingsPage {
     public formBuilder: FormBuilder,
     public navParams: NavParams,
     public alertCtrl: AlertController,
-    public modalCtrl: ModalController) {
-        this.items = [
-            {
-                name: 'Carla Timsit',
-                phone: '+33 6 45 67 35 78'
-            },
-            {
-                name: 'Julia Robert',
-                phone: '+33 6 45 67 35 78'
-            }
-        ]
+    public modalCtrl: ModalController,
+    public storage: Storage,
+    public api: Api) {
+      this.relations = [];
+      this.storage.get('connectionInfos').then((infos) => {
+        this.api.get(`users/${JSON.parse(infos).userId}/relations`).subscribe(relations => {
+          if (relations.relationships.length() > 0) {
+            relations.relationships.forEach(relation => {
+              this.api.get(`users/${relation.recipient}/info`).subscribe(info => {
+                this.relations.push({
+                  firstname: info.firstname,
+                  lastname: info.lastname,
+                  email: info.email,
+                  phone: info.phone,
+                });
+              });
+            });
+          }
+        });
+      });
   }
 
   ngOnChanges() {
@@ -63,12 +74,12 @@ export class SettingsPage {
   openModal(characterNum) {
    let modal = this.modalCtrl.create(TeacherModalPage);
    modal.present();
- }
+  }
 
  openModalAdd(characterNum) {
   let modal = this.modalCtrl.create(AddModalPage);
   modal.present();
-}
+  }
 
   doPromptPassword() {
      let prompt = this.alertCtrl.create({

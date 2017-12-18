@@ -13,11 +13,12 @@ export class SignupPage {
   // The account fields for the login form.
   // If you're using the username field with or without email, make
   // sure to add it to the type
-  account: { firstname: string, lastname: string, email: string, password: string } = {
+  account: { firstname: string, lastname: string, email: string, password: string, role: string } = {
     firstname: '',
     lastname: '',
     email: '',
-    password: ''
+    password: '',
+    role: ''
   };
 
 
@@ -28,7 +29,7 @@ export class SignupPage {
     }
 
   doSignup() {
-    this.api.post('register', this.account).subscribe((res) => {
+    this.api.post('users/register', this.account).subscribe((res) => {
       console.log("SERVER ANSWERED");
       this.navCtrl.push(MainPage);
       this.navCtrl.remove(1);

@@ -31,16 +31,16 @@
         Trouve ton professeur
       </ion-item-divider>
 
-    <ion-searchbar placeholder="Professeur" (ionInput)="getItems($event)"></ion-searchbar>
+    <ion-searchbar placeholder="Professeur" (ionInput)="getTeachers($event)"></ion-searchbar>
 
-    <ion-item-sliding *ngFor="let item of items">
+    <ion-item-sliding *ngFor="let teacher of teachers">
       <ion-item color="none">
-        {{ item }}
+        {{ teacher }}
         <ion-note item-right></ion-note>
         <ion-icon name="contact" item-left></ion-icon>
       </ion-item>
       <ion-item-options side="right">
-        <button ion-button id="add">
+        <button ion-button id="add" (click)='sendRequest(teacher._id)'>
           Ajouter
         </button>
       </ion-item-options>
@@ -55,16 +55,16 @@
       <ion-item-sliding *ngFor="let request of requests">
 
         <ion-item color="none" id="paramTres-list-item4">
-          {{ request.name }} <br> <h5>{{ request.phone }}</h5>
+          {{ request.email }} <br> <h5>{{ request.phone }}</h5>
           <ion-note item-right></ion-note>
           <ion-icon name="phone-portrait" item-left></ion-icon>
         </ion-item>
 
         <ion-item-options side="right">
-          <button ion-button color="assertive">
+          <button ion-button color="assertive" (click)='acceptRequest(request.recipient)'>
             Ajouter
           </button>
-          <button ion-button color=red>
+          <button ion-button color=red (click)='refuseRequest(request.recipient)'>
             Refuser
           </button>
         </ion-item-options>
