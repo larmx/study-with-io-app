@@ -51,7 +51,7 @@ export class SettingsPage {
       this.relations = [];
       this.storage.get('connectionInfos').then((infos) => {
         this.api.get(`users/${JSON.parse(infos).userId}/relations`).subscribe(relations => {
-          if (relations.relationships.length() > 0) {
+          if (relations.relationships.length > 0) {
             relations.relationships.forEach(relation => {
               this.api.get(`users/${relation.recipient}/info`).subscribe(info => {
                 this.relations.push({

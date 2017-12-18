@@ -23,7 +23,7 @@ export class TeacherModalPage {
       this.requests = [];
       this.storage.get('connectionInfos').then((infos) => {
         this.api.get(`users/${JSON.parse(infos).userId}/requests`).subscribe(requests => {
-          if (requests.length() > 0) {
+          if (requests.length > 0) {
             requests.forEach(request => {
               this.api.get(`users/${request.relationship.recipient}/info`).subscribe(info => {
                 this.requests.push({

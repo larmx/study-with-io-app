@@ -38,10 +38,11 @@ export class SignupPage {
   doSignup() {
     // console.log(this.account);
     // if (this.account.role === 'teacher') {
-      this.api.post('register', this.account).subscribe((res) => {
+      this.api.post('users/register', this.account).subscribe((res) => {
         console.log("SERVER ANSWERED");
         this.navCtrl.push(MainPage);
-        this.navCtrl.remove(1);
+        // TODO: gerer ce remove
+        this.navCtrl.remove(0);
       }, (err) => {
         console.log("SERVER ERROR");
         console.log(err);
