@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title id="title">STUDY WITH <span style="color: #58A1FF">IO</span></ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding="true" scroll="false">
+  <form (submit)="doSignup()">
+    <div class="row responsive-md">
+      <div class="col col-50 col-offset-25">
+        <h2> Inscris-toi gratuitement </h2>
+        <ion-list>
+          <ion-row>
+            <ion-col id="left" width-50>
+              <ion-item>
+                <ion-input type="text" name="lastname" [(ngModel)]="account.lastname" placeholder="Nom"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col id="right" width-50>
+              <ion-item>
+                <ion-input type="text" name="firstname" [(ngModel)]="account.firstname" placeholder="Prénom"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-item>
+            <ion-input type="email" name="email" [(ngModel)]="account.email" placeholder="Adresse email"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input type="tel" name="phone" placeholder = "Numéro de téléphone"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input type="password" name="password" [(ngModel)]="account.password"  placeholder="Mot de passe"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input type="password" name="confirmation" [(ngModel)]="account.passwordConfirm" placeholder="Confirmer mot de passe"></ion-input>
+          </ion-item>
+          <ion-item >
+            <ion-select class="status" multiple="false" interface="popover">
+              <ion-option [selected]="true">Élève</ion-option>
+              <ion-option>Professeur</ion-option>
+            </ion-select>
+          </ion-item>
+
+          <div class = "register-button">
+            <button ion-button color="primary" block>Commencer</button>
+          </div>
+        </ion-list>
+      </div>
+    </div>
+  </form>
+  <footer>
+    <div class="col col-50 col-offset-25">
+      Déjà inscrit(e) ? <a (click)='goToLogin()'>Connecte-toi.</a>
+    </div>
+  </footer>
+</ion-content>

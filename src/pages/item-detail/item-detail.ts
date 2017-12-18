@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
+import { ModalController, IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 
 import { ExerciseService} from "../../services/active-exercise/active-exercise";
 import { Items } from '../../providers/providers';
 import { Item } from '../../models/item';
+import {TeacherModalPage} from "../pages";
 
 @IonicPage()
 @Component({
@@ -16,16 +17,22 @@ export class ItemDetailPage {
   constructor(public navCtrl: NavController,
               navParams: NavParams,
               items: Items,
-              exerciseService: ExerciseService) {
+              exerciseService: ExerciseService,
+              public modalCtrl: ModalController) {
     this.item = navParams.get('item') || items.defaultItem;
     exerciseService.setExercise(this.item);
   }
 
   beginExercise() {
-    this.navCtrl.push('QuestionPage', {
-      question: this.item.questions[0],
-      id: 0
-    });
+    let modal = this.modalCtrl.create('QuestionPage', {
+        question: this.item.questions[0],
+        id: 0
+      });
+    modal.present();
+    // this.navCtrl.push('QuestionPage', {
+    //   question: this.item.questions[0],
+    //   id: 0
+    // });
   }
 
 }

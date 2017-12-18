@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, ModalController, NavController, ViewController } from 'ionic-angular';
+import { IonicPage, ModalController, NavController, ViewController, LoadingController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { Item } from '../../models/item';
@@ -14,14 +14,25 @@ export class ExercisesPage {
   exercises: Item[];
   progress: number;
   points: number;
-  //TODO: connect to the user's goal
   goal: number;
+  user: any;
 
   constructor(public navCtrl: NavController,
               public items: Items,
               public modalCtrl: ModalController,
               public storage: Storage,
-              public view: ViewController) {
+              public view: ViewController,
+              public loadingCtrl: LoadingController) {
+    let loading = this.loadingCtrl.create({
+      content: 'Récupération des exercices...'
+    });
+    // TODO: remettre le loading quand les screens sont terminés
+    // loading.present();
+    //
+    // this.getUser().then((user) => {
+    //   this.user = user;
+    //   loading.dismiss();
+    // });
     this.exercises = ExercisesPage.getTime(this.items.query());
     //TODO: connect points to the route api
     this.points = 14;
@@ -30,6 +41,10 @@ export class ExercisesPage {
     console.log(this.navCtrl.indexOf(this.view));
   }
 
+  async getUser() {
+    const userStr = await this.storage.get('user');
+    return JSON.parse(userStr);
+  }
 
   static getTime(items) {
     let newExercises = items;

@@ -9,7 +9,7 @@ export class Items {
   defaultItem: any = {
     "name": "Burt Bear",
     "about": "Burt is a Bear.",
-    "instructions": "Natura amicitia posset dandis ex in desiderata voluntarium causa Nam ab sed et nihil antiquior est ex quidem coniungendam est.",
+    "instructions": "Exercice de révisions sur les fonctions usuelles",
     "difficulty": 3,
     "questions": [
       {
@@ -35,10 +35,10 @@ export class Items {
   constructor() {
     let items = [
       {
-        "name": "Exercice 1",
+        "name": "Calcul d'antécédents",
         "about": "Burt is a Bear.",
         "profilePic": "assets/img/chapters/functions.jpg",
-        "instructions": "Natura amicitia posset dandis ex in desiderata voluntarium causa Nam ab sed et nihil antiquior est ex quidem coniungendam est.",
+        "instructions": "Exercice de révision sur les fonctions usuelles",
         "difficulty": 3,
         "questions": [
           {
@@ -56,26 +56,24 @@ export class Items {
             hint: "Voici un indice"
           }
         ],
-        chapter: "functions",
+        chapter: "Fonctions usuelles",
         recommended: false
       },
       {
-        "name": "Exercice 2",
-        "about": "Burt is a Bear.",
+        "name": "Variation de fonction",
         "profilePic": "assets/img/chapters/functions.jpg",
-        "instructions": "Description de l'exercice",
+        "instructions": "Et post circenses Octobres annum idus multavit in insolentiae Magnentianae dubium annum in eius atque inter Arelate alia Arelate eius exulari oriente tricensimum aut multavit excarnificatum liquido aut siquid post imperii exulari hiemem apparatu et Arelate falsum in eius Arelate.",
         "difficulty": 2,
         "questions": [
           {
-            question: "Quelle est la première question ?",
+            question: "ƒ(x) = 2x+1",
             answers: [
-              "Réponse 1",
-              "Réponse 2",
-              "Réponse 3",
-              "Réponse 4",
+              "est une fonction affine de coefficient directeur 2 et d'ordonnée à l'origine 1",
+              "est une fonction affine de coefficient directeur 1 et d'ordonnée à l'origine 2",
+              "n'est pas une fonction affine",
             ],
-            "explanations": "Le 3 est le meilleur chiffre !",
-            answerIndex: 2,
+            "explanations": "Une fonction affine est de la forme ƒ(x) = ax+b où a est le coefficient à l'origine et b est l'ordonnée à l'origine !",
+            answerIndex: 0,
             points: 30,
             time: 340,
             hint: "Voici un indice pour la question 1"
@@ -95,7 +93,7 @@ export class Items {
             hint: "Voici un indice pour la question 2"
           }
         ],
-        chapter: "functions",
+        chapter: "Fonctions",
         recommended: false
       },
       {

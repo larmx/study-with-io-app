@@ -71,7 +71,7 @@ export class SettingsPage {
     console.log('Ng All Changes');
   }
 
-  openModal(characterNum) {
+  openModal() {
    let modal = this.modalCtrl.create(TeacherModalPage);
    modal.present();
   }

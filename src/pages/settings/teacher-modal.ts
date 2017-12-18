@@ -53,7 +53,7 @@ export class TeacherModalPage {
       this.initializeTeachers();
 
       // set val to the value of the ev target
-      var val = ev.target.value;
+      const val = ev.target.value;
 
       // if the value is an empty string don't filter the items
       if (val && val.trim() != '') {
@@ -65,7 +65,7 @@ export class TeacherModalPage {
 
     sendRequest(recipient) {
       this.api.post('users/sendRequest', {
-        idRecipient: recipient, 
+        idRecipient: recipient,
       }).subscribe(res => {
         console.log(res);
       })
