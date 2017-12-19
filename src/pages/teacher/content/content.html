@@ -23,7 +23,7 @@
 
             <ion-item-sliding *ngFor="let item of items">
               <ion-item color="none" id="paramTres-list-item4">
-                {{ item.name }} <br> <h5>{{ item.phone }}</h5>
+                {{ item.firstname }} {{ item.lastname }} <br> <h5>{{ item.phone }}</h5>
                 <ion-note item-right></ion-note>
                 <ion-icon name="phone-portrait" item-left></ion-icon>
 
@@ -47,7 +47,7 @@
           <ion-searchbar placeholder="Elèves" (ionInput)="getItems($event)"></ion-searchbar>
           <ion-item-sliding *ngFor="let student of students">
             <ion-item color="none">
-              {{ student }}
+              {{ student.firstname }} {{ student.lastname }}
               <ion-note item-right></ion-note>
               <ion-icon name="contact" item-left></ion-icon>
             </ion-item>

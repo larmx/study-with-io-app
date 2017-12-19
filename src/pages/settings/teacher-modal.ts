@@ -37,26 +37,26 @@ export class TeacherModalPage {
 
 
     ionViewDidLoad() {
-        try {
-            this.api.get(`users/${this.connectionInfos.userId}/requests`).map(res => {
-                const requests = res.json();
-                console.log(requests);
-              if (requests.length > 0) {
-                requests.forEach(request => {
-                  this.api.get(`users/${request.relationship.recipient}/info`).map(info => {
-                    this.requests.push({
-                        firstname: info['firstname'],
-                        lastname: info['lastname'],
-                        email: info['email'],
-                        phone: info['phone'],
-                      recipient: request.relationship.recipient,
-                    });
-                  });
-                });
-              }
-            });
-        } catch (err) {
-        }
+        // try {
+        //     this.api.get(`users/${this.connectionInfos.userId}/requests`).map(res => {
+        //         const requests = res.json();
+        //         console.log(requests);
+        //       if (requests.length > 0) {
+        //         requests.forEach(request => {
+        //           this.api.get(`users/${request.relationship.recipient}/info`).map(info => {
+        //             this.requests.push({
+        //                 firstname: info['firstname'],
+        //                 lastname: info['lastname'],
+        //                 email: info['email'],
+        //                 phone: info['phone'],
+        //               recipient: request.relationship.recipient,
+        //             });
+        //           });
+        //         });
+        //       }
+        //     });
+        // } catch (err) {
+        // }
     }
 
     initializeTeachers() {

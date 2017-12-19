@@ -6,6 +6,11 @@ page-form {
         overflow-y: scroll;
     }
 
+    #button{
+        background-color: color($colors, grey);
+        height: 20px;
+        weight: 20px;
+    }
     #slide-title{
         text-align: center;
         background-color: color($colors, grey);
