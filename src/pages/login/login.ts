@@ -6,12 +6,13 @@ import { Storage } from "@ionic/storage";
 import { User, Api } from '../../providers/providers';
 import { MainPage, SignupPage, ContentPage } from '../pages';
 import { AuthService } from "../../services/auth/auth.service";
+import { UserService } from "../../services/user/user";
 
 @IonicPage()
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
-  providers: [AuthService]
+  providers: [UserService]
 })
 export class LoginPage {
   account: { email: string, password: string } = {
@@ -21,11 +22,11 @@ export class LoginPage {
 
   constructor(public navCtrl: NavController,
               public view: ViewController,
-              public user: User,
               public toastCtrl: ToastController,
               public api: Api,
               private alertCtrl: AlertController,
-              public storage: Storage) {
+              public storage: Storage,
+              public activeUser: UserService) {
 
   }
 
@@ -50,10 +51,10 @@ export class LoginPage {
       });
       console.log("USER", user);
       this.storage.set('user', user);
+      console.log("LOGIN USER", user);
       this.storage.set('connectionInfos', connectionInfos).then((res) =>
       {
         const viewId = this.navCtrl.indexOf(this.view);
-        console.log(viewId);
         if(JSON.parse(user).role === 'student'){
             this.navCtrl.push(MainPage);
         }

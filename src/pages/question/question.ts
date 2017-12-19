@@ -3,11 +3,13 @@ import { ModalController, IonicPage, NavController, NavParams, ViewController } 
 
 import { Items } from '../../providers/providers';
 import { ExerciseService } from "../../services/active-exercise/active-exercise";
+import { UserService } from "../../services/user/user";
 
 @IonicPage()
 @Component({
   selector: 'page-question',
-  templateUrl: 'question.html'
+  templateUrl: 'question.html',
+  providers: [UserService]
 })
 export class QuestionPage {
   question: any;
@@ -18,13 +20,15 @@ export class QuestionPage {
   answerId: number;
   points: number;
   explanations: string;
+  cumulativePoints: number;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public items: Items,
               public exerciseService: ExerciseService,
               public view: ViewController,
-              public modalCtrl: ModalController) {
+              public modalCtrl: ModalController,
+              public user: UserService) {
     const exercise = this.exerciseService.getActiveExercise();
     this.numberOfQuestions = exercise.questions.length;
 
@@ -33,6 +37,8 @@ export class QuestionPage {
     this.question = navParams.get('question') || items.defaultItem.questions[0];
     this.id = this.navParams.get('id');
     this.rightAnswerId = this.question.answerIndex;
+    this.cumulativePoints = navParams.get('points') ? navParams.get('points') : 0;
+
     this.points = this.question.points;
     this.explanations = this.question.explanations;
 
@@ -45,11 +51,13 @@ export class QuestionPage {
     console.log("Question n°:", this.id+1, "out of ", exercise.questions.length);
     console.log("FINISHING EXO:", this.id === exercise.questions.length-1);
     if (this.id === exercise.questions.length-1) {
+      this.user.setPoints(this.points + this.cumulativePoints);
       this.navCtrl.pop();
     } else {
       let modal = this.modalCtrl.create('QuestionPage', {
         question: nextQuestion,
-        id: this.id+1
+        id: this.id+1,
+        points: this.points + this.cumulativePoints
       });
       modal.present();
       // this.navCtrl.push('QuestionPage', {
@@ -68,7 +76,7 @@ export class QuestionPage {
       if (i === this.answerId) {
         return background ? "red" : "white";
       }
-      return background ? "lightgrey" : "";;
+      return background ? "lightgrey" : "";
     }
     return "";
   }
