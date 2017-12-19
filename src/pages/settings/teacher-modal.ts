@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, Platform, NavController, NavParams, ViewController, LoadingController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { HttpClient } from '@angular/common/http';
 
 import { Settings } from '../../providers/providers';
 import { Api } from '../../providers/api/api';
@@ -22,41 +23,49 @@ export class TeacherModalPage {
         public viewCtrl: ViewController,
         public api: Api,
         public storage: Storage,
-        public loadingCtrl: LoadingController
+        public loadingCtrl: LoadingController,
+        private http: HttpClient
     ){
         this.requests = [];
 
-        this.getConnectionInfos();
+        this.getConnectionInfos().then(() =>{
+          this.getRequests();
+        });
         this.loading = this.loadingCtrl.create({
             content: "Récupération des professeurs..."
-        })
+        });
         this.loading.present();
+
 
       this.initializeTeachers();
     }
 
 
-    ionViewDidLoad() {
-        try {
-            this.api.get(`users/${this.connectionInfos.userId}/requests`).map(res => {
-                const requests = res.json();
-                console.log(requests);
-              if (requests.length > 0) {
-                requests.forEach(request => {
-                  this.api.get(`users/${request.relationship.recipient}/info`).map(info => {
-                    this.requests.push({
-                        firstname: info['firstname'],
-                        lastname: info['lastname'],
-                        email: info['email'],
-                        phone: info['phone'],
+    getRequests() {
+      let res = {};
+      try {
+        this.http.get(`${this.api.url}/users/${this.connectionInfos.userId}/requests`).subscribe((requests) => {
+          if (Array.isArray(requests)) {
+            if (requests.length > 0) {
+              requests.forEach(request => {
+                this.api.get(`users/${request.relationship.recipient}/info`).map(info => {
+                  this.requests.push({
+                      firstname: info['firstname'],
+                      lastname: info['lastname'],
+                      email: info['email'],
+                      phone: info['phone'],
                       recipient: request.relationship.recipient,
-                    });
                   });
                 });
-              }
-            });
-        } catch (err) {
-        }
+              });
+            }
+          }
+
+        });
+      } catch (err) {
+        console.log(err);
+        console.log(JSON.stringify(res));
+      }
     }
 
     initializeTeachers() {

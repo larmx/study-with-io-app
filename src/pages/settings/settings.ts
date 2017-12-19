@@ -10,6 +10,7 @@ import { Items } from '../../providers/providers';
 import { TeacherModalPage } from '../pages';
 import { AddModalPage } from '../pages';
 import { Api } from '../../providers/api/api';
+import { HttpClient } from "@angular/common/http";
 
 /**
  * The Settings page is a simple form that syncs with a Settings provider
@@ -45,38 +46,42 @@ export class SettingsPage {
   subSettings: any = SettingsPage;
 
   constructor(public navCtrl: NavController,
-    public settings: Settings,
-    public formBuilder: FormBuilder,
-    public navParams: NavParams,
-    public alertCtrl: AlertController,
-    public modalCtrl: ModalController,
-    public storage: Storage,
-    public api: Api,
-    public loadingCtrl: LoadingController) {
+              public settings: Settings,
+              public formBuilder: FormBuilder,
+              public navParams: NavParams,
+              public alertCtrl: AlertController,
+              public modalCtrl: ModalController,
+              public storage: Storage,
+              public api: Api,
+              public loadingCtrl: LoadingController,
+              private http: HttpClient) {
+
       this.relations = [];
 
       this.getConnectionInfos();
       this.loading = this.loadingCtrl.create({
 
-      })
+      });
       this.loading.present();
 
   }
 
   ionViewDidLoad() {
       try {
-          this.api.get(`users/${this.connectionInfos.userId}/relations`).subscribe(relations => {
-            if (relations['relationships'].length > 0) {
-              relations['relationships'].forEach(relation => {
-                this.api.get(`users/${relation.recipient}/info`).subscribe(info => {
-                  this.relations.push({
-                    firstname: info['firstname'],
-                    lastname: info['lastname'],
-                    email: info['email'],
-                    phone: info['phone'],
+          this.http.get(`${this.api.url}/users/${this.connectionInfos.userId}/relations`).subscribe(relations => {
+            if (Array.isArray(relations)) {
+              if (relations['relationships'].length > 0) {
+                relations['relationships'].forEach(relation => {
+                  this.api.get(`${this.api.url}/users/${relation.recipient}/info`).subscribe(info => {
+                    this.relations.push({
+                      firstname: info['firstname'],
+                      lastname: info['lastname'],
+                      email: info['email'],
+                      phone: info['phone'],
+                    });
                   });
                 });
-              });
+              }
             }
           });
       } catch (err) {
