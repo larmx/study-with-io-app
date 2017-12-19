@@ -6,6 +6,7 @@ import { Item } from '../../../models/item';
 import { Items } from '../../../providers/providers';
 
 import { FormModalPage } from '../../pages';
+import { Api } from '../../../providers/api/api';
 
 @IonicPage()
 @Component({
@@ -22,85 +23,46 @@ export class ContentPage {
       public settings: Settings,
       public formBuilder: FormBuilder,
       public navParams: NavParams,
+      public api: Api,
       public modalCtrl: ModalController) {
           this.items = [
               {
-                  name: 'Carla Timsit',
+                  firstname: 'Carla',
+                  lastname: 'Vital',
                   phone: '+33 6 45 67 35 78'
               },
               {
-                  name: 'Julia Robert',
+                  firstname: 'Pierre',
+                  lastname: 'Timsit',
                   phone: '+33 6 45 67 35 78'
               }
           ]
           this.initializeItems();
-          this.requests = [
-              {
-                  name: 'Carla Timsit',
-                  phone: '+33 6 45 67 35 78'
-              },
-              {
-                  name: 'Julia Robert',
-                  phone: '+33 6 45 67 35 78'
-              }
-          ]
+          this.requests = [];
     }
 
     initializeItems() {
       this.students = [
-        'Amsterdam',
-        'Bogota',
-        'Buenos Aires',
-        'Cairo',
-        'Dhaka',
-        'Edinburgh',
-        'Geneva',
-        'Genoa',
-        'Glasglow',
-        'Hanoi',
-        'Hong Kong',
-        'Islamabad',
-        'Istanbul',
-        'Jakarta',
-        'Kiel',
-        'Kyoto',
-        'Le Havre',
-        'Lebanon',
-        'Lhasa',
-        'Lima',
-        'London',
-        'Los Angeles',
-        'Madrid',
-        'Manila',
-        'New York',
-        'Olympia',
-        'Oslo',
-        'Panama City',
-        'Peking',
-        'Philadelphia',
-        'San Francisco',
-        'Seoul',
-        'Taipeh',
-        'Tel Aviv',
-        'Tokio',
-        'Uelzen',
-        'Washington'
+          this.api.get('users/students').subscribe(items => {
+            this.students = items;
+          })
       ];
     }
 
     getItems(ev) {
       // Reset items back to all of the items
-      this.initializeItems();
+      this.api.get('users/students').subscribe(students => {
+        this.students = students;
+        // set val to the value of the ev target
+        var val = ev.target.value;
 
-      // set val to the value of the ev target
-      var val = ev.target.value;
-
-      // if the value is an empty string don't filter the items
-      if (val && val.trim() != '') {
-        this.items = this.items.filter((item) => {
-          return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
-        })
-      }
+        // if the value is an empty string don't filter the items
+        if (val && val.trim() != '') {
+          this.students = this.students.filter((item) => {
+            return (item.firstname.toLowerCase().indexOf(val.toLowerCase()) > -1);
+          })
+        }
+      })
     }
 
     ngOnChanges() {
@@ -113,5 +75,5 @@ export class ContentPage {
     openModal(characterNum) {
      let modal = this.modalCtrl.create(FormModalPage);
      modal.present();
-   }
+ }
 }

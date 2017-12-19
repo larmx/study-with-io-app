@@ -11,8 +11,12 @@ import { Settings } from '../../../providers/providers';
 export class FormModalPage {
     oldChapters: any;
     chapterList: any;
-    controles: any;
+    controle:{
+        date: any,
+        notions :any
+    };
     exercices: any;
+    selectedExercises: any;
     selectedChapters = [];
     // selectedChapters: {
     //     index: number,
@@ -75,6 +79,7 @@ export class FormModalPage {
 
           this.exercices = [
               {
+                  id: '1',
                   name: 'Trigonométrie',
                   resume: 'Révision des identités remarquables'
               }
@@ -89,8 +94,12 @@ export class FormModalPage {
               });
           }
 
+          this.controle = {
+              date: '',
+              notions : ''
+          }
 
-          console.log(this.chapters);
+          this.selectedExercises = [];
       }
 
     dismiss() {
@@ -124,7 +133,7 @@ export class FormModalPage {
     }
 
     getChanges(){
-        console.log(this.chapters);
+        console.log(this.controle);
     }
 
     getCheck(bool, chapter, notion, index){
@@ -136,7 +145,9 @@ export class FormModalPage {
             this.chapters[index].notion = '';
         }
     }
-    deleteNotion(){
 
+    addExercise(id){
+        this.selectedExercises.push(id);
+        console.log(this.selectedExercises);
     }
 }
