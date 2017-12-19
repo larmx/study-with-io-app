@@ -136,7 +136,6 @@ export class FormModalPage {
             this.chapters[index].notion = '';
         }
     }
-
     deleteNotion(){
 
     }

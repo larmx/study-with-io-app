@@ -4,7 +4,7 @@ import { AlertController } from 'ionic-angular';
 import { Storage } from "@ionic/storage";
 
 import { User, Api } from '../../providers/providers';
-import { MainPage, SignupPage } from '../pages';
+import { MainPage, SignupPage, ContentPage } from '../pages';
 import { AuthService } from "../../services/auth/auth.service";
 
 @IonicPage()
@@ -18,7 +18,6 @@ export class LoginPage {
     email: '',
     password: ''
   };
-
 
   constructor(public navCtrl: NavController,
               public view: ViewController,
@@ -55,7 +54,12 @@ export class LoginPage {
       {
         const viewId = this.navCtrl.indexOf(this.view);
         console.log(viewId);
-        this.navCtrl.push(MainPage);
+        if(JSON.parse(user).role === 'student'){
+            this.navCtrl.push(MainPage);
+        }
+        if(JSON.parse(user).role === 'teacher'){
+            this.navCtrl.push(ContentPage);
+        }
         this.navCtrl.remove(0);
       })
           .catch(
