@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ModalController, IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ModalController, IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
@@ -23,11 +23,15 @@ import { Api } from '../../providers/api/api';
 })
 export class SettingsPage {
   // Our local settings object
+  loading: any;
   options: any;
 
   settingsReady = false;
   items: any;
   form: FormGroup;
+  relations:any;
+
+  connectionInfos:any;
 
   profileSettings = {
     page: 'profile',
@@ -47,24 +51,43 @@ export class SettingsPage {
     public alertCtrl: AlertController,
     public modalCtrl: ModalController,
     public storage: Storage,
-    public api: Api) {
+    public api: Api,
+    public loadingCtrl: LoadingController) {
       this.relations = [];
-      this.storage.get('connectionInfos').then((infos) => {
-        this.api.get(`users/${JSON.parse(infos).userId}/relations`).subscribe(relations => {
-          if (relations.relationships.length > 0) {
-            relations.relationships.forEach(relation => {
-              this.api.get(`users/${relation.recipient}/info`).subscribe(info => {
-                this.relations.push({
-                  firstname: info.firstname,
-                  lastname: info.lastname,
-                  email: info.email,
-                  phone: info.phone,
+
+      this.getConnectionInfos();
+      this.loading = this.loadingCtrl.create({
+
+      })
+      this.loading.present();
+
+  }
+
+  ionViewDidLoad() {
+      try {
+          this.api.get(`users/${this.connectionInfos.userId}/relations`).subscribe(relations => {
+            if (relations['relationships'].length > 0) {
+              relations['relationships'].forEach(relation => {
+                this.api.get(`users/${relation.recipient}/info`).subscribe(info => {
+                  this.relations.push({
+                    firstname: info['firstname'],
+                    lastname: info['lastname'],
+                    email: info['email'],
+                    phone: info['phone'],
+                  });
                 });
               });
-            });
-          }
-        });
-      });
+            }
+          });
+      } catch (err) {
+
+      }
+  }
+
+  async getConnectionInfos() {
+      const connectionInfos = await this.storage.get('connectionInfos');
+      this.loading.dismiss();
+      this.connectionInfos = JSON.parse(connectionInfos);
   }
 
   ngOnChanges() {
